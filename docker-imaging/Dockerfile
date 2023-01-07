@@ -9,7 +9,6 @@
 # CMD     ["nginx", "-g", "daemon off;"]  
 # # CMD     nginx -g "daemon off;"
 
-
 FROM        centos:7 
 RUN         useradd roboshop   
 USER        roboshop 
