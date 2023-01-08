@@ -1,0 +1,16 @@
+# apiVersion:
+# kind: 
+# spec:
+# metadata:
+# Creates a pod 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-declarative
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80

@@ -14,6 +14,12 @@ Syntax :  kubectl action resources
 * kubectl --help 
 ```
 
+### PS : 
+
+```
+Kubernetes resources are indendation specific and are idempotent.
+```
+
 ### Kubernetes Configuration :
 ```
     Kubectl will try to use the config resides in ~/.kube/config file 
