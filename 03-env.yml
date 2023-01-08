@@ -16,7 +16,7 @@ spec:
     - name: GAME_NAME
       value: "PubG" 
     - name: ENVIRONMENT 
-      value: dev 
+      value: "dev" 
     - name: MONGO_DNS 
       value: "mongo.robot.internal"
     - name: MONGO_PORT
