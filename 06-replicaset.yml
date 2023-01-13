@@ -3,21 +3,20 @@ kind: ReplicaSet
 metadata:
   name: frontend
   labels:
-    app: guestbook
-    tier: frontend
+    tier: frontend                 # Labels to your set 
 spec:
   # modify replicas according to your case
   replicas: 3
   selector:
-    matchLabels:
+    matchLabels:                   # Label which matches the set, your pod will go and attach automatically.
       tier: frontend
   template:
     metadata:
       labels:
-        tier: frontend
+        tier: frontend              # Labels to the pod
     spec:
       containers:
-      - name: php-redis
+      - name: nginx
         image: nginx:latest 
 
 # Main purpose of replica-set is to ensure the given number of pods to run at any given time.
@@ -26,3 +25,19 @@ spec:
 # If you want to upgrade, all you need to do is create a new replica-set with new version and then delete the old 
 
 # If you want to have something that should ensure the given number of replicas to run anytime and allows you to update. Then in that case use Deploymentset
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+spec:
+  selector:
+    tier: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+# If you don't mention the service type, it will be dy default clusterIP Only.
