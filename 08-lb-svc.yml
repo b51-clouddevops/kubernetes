@@ -20,17 +20,30 @@ spec:
         image: nginx:latest 
 --- 
 
-# apiVersion: networking.k8s.io/v1beta1
-# kind: Ingress
-# metadata:
-#   name: ingress-myservicea
-# spec:
-#   ingressClassName: nginx
-#   rules:
-#   - host: myservicea.foo.org
-#     http:
-#       paths:
-#       - path: /
-#         backend:
-#           serviceName: myservicea
-#           servicePort: 80
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+spec:
+  selector:
+    tier: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80 
+
+--- 
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nginx.robot.internal
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: frontend-svc
+          servicePort: 80
