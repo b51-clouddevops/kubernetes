@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd
+  labels:
+    tier: httpd
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: httpd
+  template:
+    metadata:
+      labels:
+        tier: httpd
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:latest 
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpd-svc
+spec:
+  selector:
+    tier: httpd
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80 
+
+--- 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpd-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: httpd.robot51.tk
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: httpd-svc
+            port:
+              number: 80
