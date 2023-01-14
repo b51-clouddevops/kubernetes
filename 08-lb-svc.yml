@@ -20,15 +20,17 @@ spec:
         image: nginx:latest 
 --- 
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-svc
-spec:
-  selector:
-    tier: frontend
-  type: LoadBalancer
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   name: ingress-myservicea
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#   - host: myservicea.foo.org
+#     http:
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: myservicea
+#           servicePort: 80
