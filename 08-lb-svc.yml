@@ -40,7 +40,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: nginx.robot.internal
+  - host: nginx.robot51.tk
     http:
       paths:
       - path: /
